@@ -1,0 +1,37 @@
+@import url('https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap');
+
+body {
+    font-family: 'Inter', sans-serif;
+}
+
+.hero-gradient {
+    background: linear-gradient(120deg, #f0fff4 0%, #e6fffa 100%);
+}
+
+.cta-button {
+    transition: all 0.2s ease-in-out;
+}
+.cta-button:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.1), 0 2px 4px -1px rgba(0, 0, 0, 0.06);
+}
+
+.tool-card {
+    @apply flex items-center p-4 bg-white rounded-lg shadow-sm hover:shadow-md transition-all duration-200 cursor-pointer;
+}
+
+.tool-icon-bg {
+    @apply w-12 h-12 flex items-center justify-center bg-teal-100 rounded-full mr-4;
+}
+
+.tool-icon-color {
+    @apply text-teal-600;
+}
+
+.tool-description {
+    @apply max-w-2xl mx-auto mb-10;
+}
+
+.tool-container {
+    @apply max-w-3xl mx-auto mt-8 p-6 bg-white rounded-lg shadow-md;
+}
