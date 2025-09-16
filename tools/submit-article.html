@@ -43,7 +43,11 @@
             </p>
             
             <div class="tool-container">
-                <form id="submissionForm" action="https://formspree.io/f/xdklrnvl" method="POST" enctype="multipart/form-data" class="space-y-6">
+                <form id="submissionForm" action="https://api.web3forms.com/submit" method="POST" enctype="multipart/form-data" class="space-y-6">
+
+                    <input type="hidden" name="access_key" value="c34d64f0-3fc6-4eed-ae68-111fd7d69a32">
+
+                    <input type="hidden" name="redirect" value="https://web3forms.com/success">
 
                     <div class="space-y-2">
                         <label for="title" class="block text-sm font-medium text-gray-700">Article Title</label>
