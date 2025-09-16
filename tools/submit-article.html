@@ -85,7 +85,7 @@
         <div class="max-w-6xl mx-auto px-4">
             <div class="grid md:grid-cols-4 gap-8">
                 <div><h3 class="font-bold text-xl mb-4 flex items-center"><span class="mr-1">🍞</span> Bread and Letters</h3><p class="text-gray-400 mb-4">Practical skills for ambitious young professionals in South East Asia.</p><div class="flex gap-3"><a href="https://linkedin.com/company/breadandletters" class="text-gray-400 hover:text-white"><i class="fab fa-linkedin-in"></i></a><a href="https://instagram.com/breadandletters" class="text-gray-400 hover:text-white"><i class="fab fa-instagram"></i></a><a href="https://twitter.com/breadandletters" class="text-gray-400 hover:text-white"><i class="fab fa-twitter"></i></a></div></div>
-                <div><h4 class="font-semibold mb-4">Classes</h4><ul class="space-y-2 text-gray-400"><li><a href="https://academy.breadandletters.com" class="hover:text-white">Presentation Skills</a></li><li><a href="https://academy.breadandletters.com" class="hover:text-white">Excel & Data Analysis</a></li><li><a href="https://academy.breadandletters.com" class="hover:text-white">Workplace Essentials</a></li><li><a href="https://academy.breadandletters.com" class="hover:text-white">Upcoming Live Classes</a></li></ul></div>
+                <div><h4 class="font-semibold mb-4">Classes</h4><ul class="space-y-2 text-gray-400"><li><a href="https://academy.breadandletters.com" class="hover:text-white">Presentation Skills</a></li><li><a href="https://academy.breadandletters.com" class="hover:text-white">Excel & Data Analysis</a></li><li><a href="https://academy.breadandletters.com" class="hover:text-white">Workplace Essentials</a></li><li><a href="https://academy.breadandletters.com/upcoming-live-classes" class="hover:text-white">Upcoming Live Classes</a></li></ul></div>
                 <div><h4 class="font-semibold mb-4">Resources</h4><ul class="space-y-2 text-gray-400"><li><a href="https://blog.breadandletters.com" class="hover:text-white">Blog</a></li><li><a href="https://blog.breadandletters.com/resources" class="hover:text-white">Free Templates</a></li><li><a href="https://blog.breadandletters.com/career-guides" class="hover:text-white">Career Guides</a></li><li><a href="https://academy.breadandletters.com/#faq" class="hover:text-white">FAQ</a></li></ul></div>
                 <div><h4 class="font-semibold mb-4">Contact</h4><ul class="space-y-2 text-gray-400"><li><a href="mailto:academy@breadandletters.com" class="hover:text-white">academy@breadandletters.com</a></li><li><a href="https://academy.breadandletters.com/about" class="hover:text-white">About Us</a></li><li><a href="https://academy.breadandletters.com/privacy" class="hover:text-white">Privacy Policy</a></li><li><a href="https://academy.breadandletters.com/terms" class="hover:text-white">Terms of Service</a></li></ul></div>
             </div>
@@ -100,15 +100,25 @@
 
         function prepareAndSubmit(event) {
             event.preventDefault(); // Prevent the form from submitting normally
-
+            
             const form = document.getElementById('submissionForm');
             
-            // Get all the data from the form fields
+            // Basic validation check to ensure all required fields are filled
+            if (!form.reportValidity()) {
+                return;
+            }
+
             const title = document.getElementById('title').value;
             const author = document.getElementById('author').value;
             const categoriesInput = document.getElementById('categories').value;
             const content = document.getElementById('body').value;
             const imageFile = document.getElementById('image').files[0];
+
+            // Explicitly check if an image file has been selected
+            if (!imageFile) {
+                alert("Please select a thumbnail/image file to upload.");
+                return;
+            }
 
             // Generate the YAML front matter dynamically
             const now = new Date();
@@ -116,7 +126,7 @@
             
             const categories = categoriesInput.split(',').map(cat => `  - ${cat.trim()}`).join('\n');
             
-            // Create the full Markdown string with a placeholder for the image path
+            // Create the full Markdown string with the correct image path
             const markdownContent = `---
 layout: post
 title: ${title}
