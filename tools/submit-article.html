@@ -71,8 +71,6 @@
                         <textarea id="body" name="body" rows="20" required class="w-full p-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-teal-500"></textarea>
                     </div>
 
-                    <input type="hidden" name="markdown_content" id="markdown-output">
-
                     <button type="submit" onclick="prepareAndSubmit(event)" class="w-full bg-teal-600 text-white font-medium py-3 rounded-md hover:bg-teal-700 transition duration-300 ease-in-out">
                         Submit Article
                     </button>
@@ -108,43 +106,7 @@
                 return;
             }
 
-            const title = document.getElementById('title').value;
-            const author = document.getElementById('author').value;
-            const categoriesInput = document.getElementById('categories').value;
-            const content = document.getElementById('body').value;
-            const imageFile = document.getElementById('image').files[0];
-
-            // Explicitly check if an image file has been selected
-            if (!imageFile) {
-                alert("Please select a thumbnail/image file to upload.");
-                return;
-            }
-
-            // Generate the YAML front matter dynamically
-            const now = new Date();
-            const dateFormatted = `${now.getFullYear()}-${(now.getMonth() + 1).toString().padStart(2, '0')}-${now.getDate().toString().padStart(2, '0')} ${now.getHours().toString().padStart(2, '0')}:${now.getMinutes().toString().padStart(2, '0')}:${now.getSeconds().toString().padStart(2, '0')} +0800`;
-            
-            const categories = categoriesInput.split(',').map(cat => `  - ${cat.trim()}`).join('\n');
-            
-            // Create the full Markdown string with the correct image path
-            const markdownContent = `---
-layout: post
-title: ${title}
-author: ${author}
-date: ${dateFormatted}
-categories:
-${categories}
-thumbnail: /assets/images/post/${author.replace(/\s/g, '-').toLowerCase()}/${imageFile.name}
-image: /assets/images/post/${author.replace(/\s/g, '-').toLowerCase()}/${imageFile.name}
----
-
-${content}
-`;
-            
-            // Set the value of the hidden input field to the generated Markdown
-            document.getElementById('markdown-output').value = markdownContent;
-
-            // Use a new FormData object to include the hidden field and the file
+            // Use a new FormData object to include the form data
             const formData = new FormData(form);
             
             // Submit the form to Formspree
